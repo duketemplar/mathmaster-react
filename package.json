@@ -27,6 +27,7 @@
     "start:api": "nodemon --harmony ./api-server/api-server.js --port $npm_package_config_api_server_port",
     "start": "npm-run-all --parallel start:api start:webpack-dev-server",
     "start:webpack-dev-server": "NODE_ENV=development node ./webpack/webpack-dev-server",
+    "start:windows": "set NODE_ENV=development&&node ./webpack/webpack-dev-server",
     "validate": "npm-run-all lint test",
     "webpack": "webpack --colors --progress --config ./webpack/config",
     "test": "karma start",
