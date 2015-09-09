@@ -12,7 +12,7 @@ import React from 'react';
 import Account from './account';
 
 /*
- * React dummy component class definition. 
+ * React dummy component class definition.
  * From pure React perspective class definitions for dummy and container components are no different.
  * The main differences between dummy and container components are in their implementation and how they interact with the rest of the application.
  */
