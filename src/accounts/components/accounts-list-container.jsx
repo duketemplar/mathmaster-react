@@ -1,6 +1,6 @@
 /*
  * File contains container React component. All React components are split up in two groups - container components and dummy components.
- * Container components are responsible for loading data and providing this data as props to dummy components. 
+ * Container components are responsible for loading data and providing this data as props to dummy components.
  * Container components are not responsible for rendering any of the data. They only render dummy components and provide them the data.
  *
  * See https://medium.com/@learnreact/container-components-c0e67432e005 for more details on container and dummy components approach.
@@ -19,7 +19,7 @@ class AccountsListContainer extends React.Component {
 
   /*
    * Fires fetchAccounts action when component is mounted in the DOM.
-   * Actions are bound to props via Redux connect() function. 
+   * Actions are bound to props via Redux connect() function.
    * See app.jsx for more details on how actions are bound to props.
    */
   componentDidMount() {
@@ -28,7 +28,7 @@ class AccountsListContainer extends React.Component {
 
   /*
    * Renders current state of the application according to provided props and state.
-   * render() function should be pure function, 
+   * render() function should be pure function,
    * i.e. it should always return the same result given the same input - neither props nor state should ever be modified within render() function.
    */
   render() {

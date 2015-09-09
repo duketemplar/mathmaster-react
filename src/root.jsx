@@ -1,9 +1,9 @@
 /*
- * File contains root application component (App). App component is wrapped in i18n component from norndet-i18n package 
- * to make localization functions available to all of the children components via React Context. 
- * 
+ * File contains root application component (App). App component is wrapped in i18n component from norndet-i18n package
+ * to make localization functions available to all of the children components via React Context.
+ *
  * File exports a function that should be triggered once locale is resolved and localization data is loaded.
- * 
+ *
  * See https://medium.com/@skwee357/the-land-of-undocumented-react-js-the-context-99b3f931ff73 on more information regarding React Context.
  */
 
