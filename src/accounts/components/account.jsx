@@ -8,8 +8,8 @@ class Account extends React.Component {
 
     return (
       <li>
-        <div>{ alias } - { accno }</div>
-        <div>{ this.context.translate('PRICE_LIST.PRICES') }</div>
+        <div>{ alias }</div>
+        <div>{ this.context.getIntlMessage('ACCOUNTS.ACCOUNT_NUMBER') }: { accno }</div>
         <div>
           <FormattedNumber
             value='100'
@@ -22,7 +22,7 @@ class Account extends React.Component {
 }
 
 Account.contextTypes = {
-  translate: React.PropTypes.func.isRequired,
+  getIntlMessage: React.PropTypes.func.isRequired,
 };
 
 export default Account;
