@@ -10,12 +10,12 @@ describe('accounts.components.AccountListContainer', () => {
 
   describe('when isFetching = false', () => {
     beforeEach(() => {
-      context = { translate: () => 'yeah'};
+      context = { getIntlMessage: () => 'Loading'};
 
       // This is also an example how to test React Context, this could probably be moved to the test helper
       const Wrapper = React.createClass({
         childContextTypes: {
-          translate: React.PropTypes.func,
+          getIntlMessage: React.PropTypes.func,
         },
         getChildContext: () => context,
         render() {
@@ -34,6 +34,6 @@ describe('accounts.components.AccountListContainer', () => {
 
     it('calls fetchAccounts on componentDidMount', () => expect(props.fetchAccounts).to.have.been.called);
 
-    it('shows account name', () =>  expect(node.textContent).to.include('Loading.. (yeah)'));
+    it('shows account name', () =>  expect(node.textContent).to.include('Loading'));
   });
 });

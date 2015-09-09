@@ -10,8 +10,8 @@ describe('accounts.components.Account', () => {
   beforeEach(() => {
     const props = {
       messages: {
-        PRICE_LIST: {
-          PRICES: 'Mina priser',
+        ACCOUNTS: {
+          ACCOUNT_NUMBER: 'Account',
         },
       },
       locales: ['en-US'],
@@ -51,9 +51,8 @@ describe('accounts.components.Account', () => {
     node = React.findDOMNode(component);
   });
 
-  it('translates PRICE_LIST.PRICES', () => expect(node.textContent).to.include('Mina priser'));
-
+  it('translates ACCOUNTS.ACCOUNT_NUMBER', () => expect(node.textContent).to.include('Account'));
   it('shows account value', () => expect(node.textContent).to.include('100.00'));
-
-  it('shows account name', () =>  expect(node.textContent).to.include('foo - 123'));
+  it('shows account alias', () =>  expect(node.textContent).to.include('foo'));
+  it('shows account name', () =>  expect(node.textContent).to.include('Account: 123'));
 });

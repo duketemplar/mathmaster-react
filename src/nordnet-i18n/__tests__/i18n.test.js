@@ -6,12 +6,12 @@ const TestUtils = React.addons.TestUtils;
 describe('i18n', () => {
   class MyComponent extends React.Component {
     render() {
-      return (<h2>{this.context.translate(this.props.title)}</h2>);
+      return (<h2>{this.context.getIntlMessage(this.props.title)}</h2>);
     }
   }
 
   MyComponent.contextTypes = {
-    translate: React.PropTypes.func.isRequired,
+    getIntlMessage: React.PropTypes.func.isRequired,
   };
 
   MyComponent.propTypes = {

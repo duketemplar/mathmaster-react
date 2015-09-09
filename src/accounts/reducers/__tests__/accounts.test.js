@@ -1,4 +1,4 @@
-import {ACCOUNTS_REQUEST} from '../../actions/fetch-accounts';
+import { ACCOUNTS_REQUEST } from '../../actions/action-types';
 import accounts from '../accounts';
 
 describe('accounts.reducers.accounts', () => {
