@@ -1,6 +1,6 @@
 /*
  * File contains initialization of Redux store. Store is initialised with imported reducers and middleware.
- * 
+ *
  * See http://rackt.github.io/redux/docs/basics/Store.html for more details on Redux stores.
  */
 

@@ -1,21 +1,21 @@
 /*
  * File contains actions and action creators.
- * 
- * Actions are payloads of information that send data from your application to your store. 
+ *
+ * Actions are payloads of information that send data from your application to your store.
  * They are the only source of information for the store. You send them to the store using store.dispatch().
  *
  * Action creators are pure functions that create actions.
- * 
+ *
  * See http://rackt.github.io/redux/docs/basics/Actions.html for more details on actions and action creators.
  */
 
 import api from 'nordnet-next-api';
 
 // imports action types
-import { 
-  ACCOUNTS_REQUEST, 
-  ACCOUNTS_REQUEST_SUCCESS, 
-  ACCOUNTS_REQUEST_FAILURE 
+import {
+  ACCOUNTS_REQUEST,
+  ACCOUNTS_REQUEST_SUCCESS,
+  ACCOUNTS_REQUEST_FAILURE
 } from './action-types';
 
 /*
