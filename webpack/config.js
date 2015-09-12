@@ -51,6 +51,7 @@ var config = {
   resolve: {
     alias: {
       'nordnet-i18n': path.join(__dirname, './../src/nordnet-i18n'),
+      'l10n': path.join(__dirname, './../src/l10n'),
       'mock-login': path.join(__dirname, './../api-server/mock-login.jsx'),
     },
     extensions: ['', '.js', '.json', '.jsx'],

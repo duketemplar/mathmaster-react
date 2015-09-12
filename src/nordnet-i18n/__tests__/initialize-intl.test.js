@@ -44,7 +44,9 @@ describe('initializeLocale', () => {
     describe('locale ' + locale, () => {
       it('is supported and returns the locale so we can chain the promise', (done) => {
         initializeLocale(locale).then((res)=> {
-          expect(res).to.equal(locale);
+          // ugly hack since no-NO is transformed into nb-NO
+          const expectedLocale = locale !== 'no-NO' ? locale : 'nb-NO';
+          expect(res.locales[0]).to.equal(expectedLocale);
           done();
         }, done).catch(done);
       });

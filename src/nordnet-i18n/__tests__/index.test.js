@@ -1,5 +1,5 @@
 import api from 'nordnet-next-api';
-import {initialize, supportedLocales} from '../index';
+import { initialize, supportedLocales } from '../index';
 
 describe('nordnet-i18n', () => {
   describe('initialize', () => {
@@ -17,8 +17,8 @@ describe('nordnet-i18n', () => {
     };
 
     it('resolves to the locale', (done) => {
-      initialize(element).then((locale) => {
-        expect(locale).to.equal('sv-SE');
+      initialize(element).then((i18nData) => {
+        expect(i18nData.locales[0]).to.equal('sv-SE');
         done();
       }, done).catch(done);
     });

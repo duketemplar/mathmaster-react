@@ -36,21 +36,10 @@ function initialize(element) {
   try {
     i18n
       .initialize(element)
-      .then(createIntlData)
       .then(root.bind(null, element));
   } catch (e) {
     // TODO send error report to the server
   }
-}
-
-/*
- * Creates localization object with messages for provided locale.
- */
-function createIntlData(locale) {
-  return {
-    messages: require(`./i18n/phrase.${locale}.json`),
-    locales: [locale],
-  };
 }
 
 // ensures that 'Nordnet' object is defined in the global scope
