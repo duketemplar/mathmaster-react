@@ -25,12 +25,13 @@
         The following libraries are included in vendor bundle:
           - react
           - react-router
+          - intl
           - react-intl
           - redux
           - react-redux
 
         For specifics of which versions of these libraries are used see Platforms Confluence pages. -->
-  <script src="/sc/js-vendor-bundle/vendor.bundle.1.0.0.js"></script>
+  <script src="/sc/js-vendor-bundle/vendor.bundle.1.0.1.js"></script>
 
   <!-- Application loading with cache busting for new versions. 
         Dynamically injects <script> tags on the page for all defined entry points. -->
@@ -39,10 +40,13 @@
   <!-- Application startup. Executes application initialization function once the rest of the application code is loaded.
         REPLACE 'nordnet-react-app' with your application name. -->
   <script>
-    var domElement = document.getElementById('nordnet-react-app');
-    if (domElement) {
-      window.Nordnet['nordnet-react-app'](domElement);
-    }
+    (function(window, document) {
+      var appName = 'nordnet-react-app';
+      var domElement = document.getElementById(appName);
+      if (domElement && window.Nordnet[appName]) {
+        window.Nordnet[appName](domElement);
+      }
+    })(window, document);
   </script>
 </body>
 </html>

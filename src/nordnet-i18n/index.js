@@ -1,5 +1,5 @@
 import getLocale from './get-locale';
-import {initializeLocale, supportedLocales} from './initialize-intl';
+import { initializeLocale, supportedLocales } from './initialize-intl';
 import i18n from './i18n.jsx';
 
 export default {

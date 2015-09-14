@@ -34,7 +34,6 @@ function thenify(f) {
 
 function ensuresvSE(cb) {
   require.ensure([
-    'intl',
     'intl/locale-data/jsonp/sv-SE.js',
   ], function resolved(require) {
     require('intl');
@@ -45,7 +44,6 @@ function ensuresvSE(cb) {
 
 function ensurefiFI(cb) {
   require.ensure([
-    'intl',
     'intl/locale-data/jsonp/fi-FI.js',
   ], function resolved(require) {
     require('intl');
@@ -56,7 +54,6 @@ function ensurefiFI(cb) {
 
 function ensuresvFI(cb) {
   require.ensure([
-    'intl',
     'intl/locale-data/jsonp/sv-FI.js',
   ], function resolved(require) {
     require('intl');
@@ -67,7 +64,6 @@ function ensuresvFI(cb) {
 
 function ensurenbNO(cb) {
   require.ensure([
-    'intl',
     'intl/locale-data/jsonp/nb-NO.js',
   ], function resolved(require) {
     require('intl');
@@ -78,7 +74,6 @@ function ensurenbNO(cb) {
 
 function ensurennNO(cb) {
   require.ensure([
-    'intl',
     'intl/locale-data/jsonp/nn-NO.js',
   ], function resolved(require) {
     require('intl');
@@ -89,7 +84,6 @@ function ensurennNO(cb) {
 
 function ensuredaDK(cb) {
   require.ensure([
-    'intl',
     'intl/locale-data/jsonp/da-DK.js',
   ], function resolved(require) {
     require('intl');
@@ -100,7 +94,6 @@ function ensuredaDK(cb) {
 
 function ensureen(cb) {
   require.ensure([
-    'intl',
     'intl/locale-data/jsonp/en.js',
   ], function resolved(require) {
     require('intl');

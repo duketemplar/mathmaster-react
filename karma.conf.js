@@ -70,7 +70,15 @@ module.exports = function(config) {
           },
         ],
         loaders: [
-          {test: /\.js[x]?$/, loader: 'babel-loader', exclude: /node_modules/},
+          {
+            test: /\.js[x]?$/,
+            loader: 'babel-loader',
+            exclude: /node_modules/
+          }, {
+            test: /\.json$/,
+            loader: 'json-loader',
+            exclude: /node_modules/
+          }
         ],
       },
       plugins: [
