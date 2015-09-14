@@ -41,8 +41,9 @@
         REPLACE 'nordnet-react-app' with your application name. -->
   <script>
     (function(window, document) {
-      var domElement = document.getElementById('nordnet-react-app');
-      if (domElement && window.Nordnet['nordnet-react-app']) {
+      var appName = 'nordnet-react-app';
+      var domElement = document.getElementById(appName);
+      if (domElement && window.Nordnet[appName]) {
         window.Nordnet['nordnet-react-app'](domElement);
       }
     })(window, document);

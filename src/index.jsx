@@ -30,7 +30,7 @@ import root from './root';
  * Application start-up and initialization.
  * Ensures that application is loaded with correct localization - loads language and country from nExt API,
  * if those are not defined on the container element via data attributes (data-lang and data-country).
- * Once locale is resolved createIntlData() loads appropriate localization and root component is rendered.
+ * Once locale is resolved l10nLoader() loads appropriate localization and root component is rendered.
  *
  * Initialization function is saved on the global window.Nordnet object. Initialization is triggered when application is fully loaded on the page.
  * See index.html for more details.
