@@ -40,10 +40,12 @@
   <!-- Application startup. Executes application initialization function once the rest of the application code is loaded.
         REPLACE 'nordnet-react-app' with your application name. -->
   <script>
-    var domElement = document.getElementById('nordnet-react-app');
-    if (domElement) {
-      window.Nordnet['nordnet-react-app'](domElement);
-    }
+    (function(window, document) {
+      var domElement = document.getElementById('nordnet-react-app');
+      if (domElement && window.Nordnet['nordnet-react-app']) {
+        window.Nordnet['nordnet-react-app'](domElement);
+      }
+    })(window, document);
   </script>
 </body>
 </html>
