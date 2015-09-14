@@ -71,8 +71,8 @@ module.exports = function(config) {
         ],
         loaders: [
           {
-            test: /\.js[x]?$/, 
-            loader: 'babel-loader', 
+            test: /\.js[x]?$/,
+            loader: 'babel-loader',
             exclude: /node_modules/
           }, {
             test: /\.json$/,
@@ -87,7 +87,7 @@ module.exports = function(config) {
       resolve: {
         alias: {
           'nordnet-i18n': path.join(__dirname, './src/nordnet-i18n'),
-          'l10n': path.join(__dirname, './src/l10n'),
+          'nordnet-utils': path.join(__dirname, './src/nordnet-utils'),
           'mock-login': path.join(__dirname, './api-server/mock-login.jsx'),
         },
         extensions: ['', '.js', '.json', '.jsx'],

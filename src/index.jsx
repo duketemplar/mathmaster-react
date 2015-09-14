@@ -20,6 +20,9 @@ import React from 'react';
 // importing localization support, using alias for nordnet-i18n which is configured in webpack (see webpack/conifg.js)
 import i18n from 'nordnet-i18n';
 
+// import loader of supported l10n files in the l10n folder.
+import l10nLoader from './l10n-loader';
+
 // importing application root component
 import root from './root';
 
@@ -36,6 +39,7 @@ function initialize(element) {
   try {
     i18n
       .initialize(element)
+      .then(l10nLoader)
       .then(root.bind(null, element));
   } catch (e) {
     // TODO send error report to the server

@@ -25,7 +25,7 @@ export function initializeLocale(locale) {
     throw new Error(`Unknown locale "${locale}"`);
   }
 
-  return thenify(initializer).then(i18nData => i18nData);
+  return thenify(initializer).then(() => locale);
 }
 
 function thenify(f) {
@@ -35,18 +35,10 @@ function thenify(f) {
 function ensuresvSE(cb) {
   require.ensure([
     'intl/locale-data/jsonp/sv-SE.js',
-    'l10n/phrase.sv-SE.json',
   ], function resolved(require) {
     require('intl');
     require('intl/locale-data/jsonp/sv-SE.js');
-
-    // creates localization object with messages for provided locale
-    const i18nData = {
-      messages: require('l10n/phrase.sv-SE.json'),
-      locales: ['sv-SE'],
-    };
-
-    cb(i18nData);
+    cb();
   });
 }
 
@@ -57,14 +49,7 @@ function ensurefiFI(cb) {
   ], function resolved(require) {
     require('intl');
     require('intl/locale-data/jsonp/fi-FI.js');
-
-    // creates localization object with messages for provided locale
-    const i18nData = {
-      messages: require('l10n/phrase.fi-FI.json'),
-      locales: ['fi-FI'],
-    };
-
-    cb(i18nData);
+    cb();
   });
 }
 
@@ -75,14 +60,7 @@ function ensuresvFI(cb) {
   ], function resolved(require) {
     require('intl');
     require('intl/locale-data/jsonp/sv-FI.js');
-
-    // creates localization object with messages for provided locale
-    const i18nData = {
-      messages: require('l10n/phrase.sv-FI.json'),
-      locales: ['sv-FI'],
-    };
-
-    cb(i18nData);
+    cb();
   });
 }
 
@@ -93,14 +71,7 @@ function ensurenbNO(cb) {
   ], function resolved(require) {
     require('intl');
     require('intl/locale-data/jsonp/nb-NO.js');
-
-    // creates localization object with messages for provided locale
-    const i18nData = {
-      messages: require('l10n/phrase.nb-NO.json'),
-      locales: ['nb-NO'],
-    };
-
-    cb(i18nData);
+    cb();
   });
 }
 
@@ -111,14 +82,7 @@ function ensurennNO(cb) {
   ], function resolved(require) {
     require('intl');
     require('intl/locale-data/jsonp/nn-NO.js');
-
-    // creates localization object with messages for provided locale
-    const i18nData = {
-      messages: require('l10n/phrase.nn-NO.json'),
-      locales: ['nn-NO'],
-    };
-
-    cb(i18nData);
+    cb();
   });
 }
 
@@ -129,14 +93,7 @@ function ensuredaDK(cb) {
   ], function resolved(require) {
     require('intl');
     require('intl/locale-data/jsonp/da-DK.js');
-
-    // creates localization object with messages for provided locale
-    const i18nData = {
-      messages: require('l10n/phrase.da-DK.json'),
-      locales: ['da-DK'],
-    };
-
-    cb(i18nData);
+    cb();
   });
 }
 
@@ -147,13 +104,6 @@ function ensureen(cb) {
   ], function resolved(require) {
     require('intl');
     require('intl/locale-data/jsonp/en.js');
-
-    // creates localization object with messages for provided locale
-    const i18nData = {
-      messages: require('l10n/phrase.en.json'),
-      locales: ['en'],
-    };
-
-    cb(i18nData);
+    cb();
   });
 }
