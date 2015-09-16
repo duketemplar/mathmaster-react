@@ -1,8 +1,14 @@
 var resolve = require('path').resolve;
 var assert = require('assert');
 var send = require('koa-send');
+var _ = require('lodash');
 
 module.exports = serve;
+
+// Declare authenticated paths here
+const loginRequiredPaths = [
+  'accounts',
+];
 
 function serve(root, opts) {
   opts = opts || {};
@@ -26,11 +32,18 @@ function serve(root, opts) {
     this.body = {language: language, country: country};
   }
 
+  function isLoginRequired(path){
+    return _.any(loginRequiredPaths, function(loginRequiredPath){
+      return path.indexOf('/next/2/' + loginRequiredPath) !== -1;
+    });
+  }
+
   return function *serve(next){
     if (this.method == 'HEAD' || this.method == 'GET') {
 
-      if(this.path.indexOf('/next/2/accounts') !== -1) {
+      if (isLoginRequired(this.path)) {
         opts.root = rootPath + '/' + this.cookies.get('username');
+        console.log("Login required for path: " + this.path)
       } else if (this.path.indexOf('/next/2/login') !== -1) {
         if (this.cookies.get('authenticated') === 'true') {
           opts.root = rootPath + '/' + this.cookies.get('username');
@@ -42,8 +55,14 @@ function serve(root, opts) {
         opts.root = rootPath + '/common';
       }
 
-      if (yield send(this, this.path + '.json', opts)) return;
+      // Need to url encode since koa-send always url decodes the path
+      var queryStringPart = this.querystring ? encodeURIComponent(encodeURIComponent('?' + this.querystring)) : '';
+      var path = this.path + queryStringPart + '.json';
+
+      console.log("Serve file: " + opts.root + path);
+      if (yield send(this, path, opts)) return;
     }
+
     yield* next;
   };
 }
