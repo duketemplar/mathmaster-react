@@ -19,7 +19,7 @@ describe('accounts.states', () => {
 
   beforeEach(() => {
     sandbox = sinon.sandbox.create();
-    sandbox.stub(api, 'get', () => Promise.resolve('some accounts'));
+    sandbox.stub(api, 'get', () => Promise.resolve({data: 'some accounts'}));
   });
 
   afterEach(() => {

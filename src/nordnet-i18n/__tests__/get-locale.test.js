@@ -28,7 +28,7 @@ describe('getLocale', () => {
 
     beforeEach(() => {
       sandbox = sinon.sandbox.create();
-      sandbox.stub(api, 'get', () => Promise.resolve({language: 'en', country: 'gb'}));
+      sandbox.stub(api, 'get', () => Promise.resolve({data: {language: 'en', country: 'gb'}}));
     });
 
     afterEach(() => sandbox.restore());

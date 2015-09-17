@@ -39,7 +39,7 @@
     "classnames": "^2.1.1",
     "es6-promise": "^3.0.2",
     "intl": "^1.0.0",
-    "nordnet-next-api": "^1.0.0",
+    "nordnet-next-api": "^2.0.0",
     "normalize.css": "^3.0.3",
     "react": "^0.13.3",
     "react-intl": "^1.2.0",
