@@ -8,5 +8,5 @@ export default function getLocale(element) {
     return Promise.resolve(`${lang}-${country}`);
   }
 
-  return api.get('/next/2/login').then(response => `${response.language}-${response.country}`);
+  return api.get('/next/2/login').then(({ data }) => `${data.language}-${data.country}`);
 }
