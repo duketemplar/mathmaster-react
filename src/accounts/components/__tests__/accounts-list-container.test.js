@@ -1,39 +1,47 @@
 import React from 'react/addons';
+import {i18n} from 'nordnet-i18n';
 import AccountListContainer from '../accounts-list-container.jsx';
 
 const TestUtils = React.addons.TestUtils;
 
 describe('accounts.components.AccountListContainer', () => {
-  let props;
-  let context;
   let node;
 
-  describe('when isFetching = false', () => {
+  const props = {
+    messages: {
+      LOADING: 'Loading',
+    },
+    accounts: [],
+    formats: {},
+    locales: ['en-US'],
+  };
+
+  function getDomNode() {
+    const component = TestUtils.renderIntoDocument(React.createElement(i18n(AccountListContainer), props));
+    return React.findDOMNode(component);
+  }
+
+  describe('when isFetching = true', () => {
     beforeEach(() => {
-      context = { getIntlMessage: () => 'Loading'};
-
-      // This is also an example how to test React Context, this could probably be moved to the test helper
-      const Wrapper = React.createClass({
-        childContextTypes: {
-          getIntlMessage: React.PropTypes.func,
-        },
-        getChildContext: () => context,
-        render() {
-          return (<AccountListContainer {...props}/>);
-        },
-      });
-
-      props = {
-        isFetching: true,
-        fetchAccounts: sinon.spy(),
-      };
-
-      const component = TestUtils.renderIntoDocument(<Wrapper/>);
-      node = React.findDOMNode(component);
+      props.isFetching = true;
+      props.fetchAccounts = sinon.spy();
+      node = getDomNode();
     });
 
     it('calls fetchAccounts on componentDidMount', () => expect(props.fetchAccounts).to.have.been.called);
 
-    it('shows account name', () =>  expect(node.textContent).to.include('Loading'));
+    it('shows loading name spinner', () =>  expect(node.textContent).to.include('Loading'));
+  });
+
+  describe('when isFetching = false', () => {
+    beforeEach(() => {
+      props.isFetching = false;
+      props.fetchAccounts = sinon.spy();
+      node = getDomNode();
+    });
+
+    it('calls fetchAccounts on componentDidMount', () => expect(props.fetchAccounts).to.have.been.called);
+
+    it('shows does not show loading spinner', () =>  expect(node.textContent).to.not.include('Loading'));
   });
 });
