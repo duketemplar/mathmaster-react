@@ -8,6 +8,8 @@
 
 import React from 'react';
 
+import { translatable } from 'nordnet-i18n';
+
 // importing dummy component that is responsible for rendering data
 import AccountsList from './accounts-list';
 
@@ -37,7 +39,7 @@ class AccountsListContainer extends React.Component {
     // translations are loaded from src/i18n folder
     if (this.props.isFetching) {
       return (
-        <div>{ this.context.getIntlMessage('LOADING') }</div>
+        <div>{ this.props.getIntlMessage('LOADING') }</div>
       );
     }
 
@@ -48,10 +50,5 @@ class AccountsListContainer extends React.Component {
   }
 }
 
-// React context types that should be accessible within component
-AccountsListContainer.contextTypes = {
-  getIntlMessage: React.PropTypes.func.isRequired, // localization support, function that should be used to look up translations
-};
-
 // exporting React container element by default
-export default AccountsListContainer;
+export default translatable(AccountsListContainer);

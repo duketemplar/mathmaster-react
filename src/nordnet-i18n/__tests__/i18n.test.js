@@ -4,38 +4,46 @@ import React from 'react/addons';
 const TestUtils = React.addons.TestUtils;
 
 describe('i18n', () => {
-  class MyComponent extends React.Component {
-    render() {
-      return (<h2>{this.context.getIntlMessage(this.props.title)}</h2>);
-    }
+  function renderI18NParentWithProps(Component, props) {
+    const App = i18n(Component);
+    const tree = TestUtils.renderIntoDocument(
+      <App {...props}/>
+    );
+    return tree;
   }
 
-  MyComponent.contextTypes = {
-    getIntlMessage: React.PropTypes.func.isRequired,
-  };
-
-  MyComponent.propTypes = {
-    title: React.PropTypes.string,
-  };
-
-  const intlData = {
-    locales: ['en-US'],
-    messages: {
-      post: {
-        title: 'Hej hopp',
-        meta: 'Posted {ago}, {num, plural, one{# comment} other{# comments}}',
+  function createComponentWithContextTypes() {
+    return React.createClass({
+      contextTypes: {
+        formats: React.PropTypes.object.isRequired,
+        messages: React.PropTypes.object.isRequired,
+        locales: React.PropTypes.array.isRequired,
       },
-    },
-  };
+      render() {return (<div/>); },
+    });
+  }
 
-  const App = i18n(MyComponent);
+  const locales = [1, 2, 3];
+  const formats = {foo: 'bar'};
+  const messages = {baaz: 'baaz'};
 
-  it('exposes the translate method', () => {
-    const tree = TestUtils.renderIntoDocument(
-      <App title="post.title" {...intlData}/>
-    );
+  let component;
 
-    const component = TestUtils.findRenderedDOMComponentWithTag(tree, 'h2');
-    expect(component.getDOMNode().textContent).to.equal('Hej hopp');
+  beforeEach(() => {
+    const Component = createComponentWithContextTypes();
+    const tree = renderI18NParentWithProps(Component, {formats, locales, messages});
+    component = TestUtils.findRenderedComponentWithType(tree, Component);
+  });
+
+  describe('when parent is given property: "format"', () => {
+    it('expose the format context', () => expect(component.context.formats).to.equal(formats));
+  });
+
+  describe('when parent is given property: "messages"', () => {
+    it('expose the messages context', () => expect(component.context.messages).to.equal(messages));
+  });
+
+  describe('when parent is given property: "locales"', () => {
+    it('expose the locales context', () => expect(component.context.locales).to.equal(locales));
   });
 });

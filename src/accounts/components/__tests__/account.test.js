@@ -1,6 +1,6 @@
 import React from 'react/addons';
-import Account from '../account.jsx';
 import {i18n} from 'nordnet-i18n';
+import Account from '../account.jsx';
 
 const TestUtils = React.addons.TestUtils;
 
@@ -14,6 +14,7 @@ describe('accounts.components.Account', () => {
           ACCOUNT_NUMBER: 'Account',
         },
       },
+      formats: {},
       locales: ['en-US'],
       account: {
         alias: 'foo',
@@ -21,33 +22,7 @@ describe('accounts.components.Account', () => {
       },
     };
 
-    // Sorry, far too much code here !
-    // This is needed to setup the test object (component).
-    // It injects contexts for both i18n and react routes.
-    // TODO: this can probably be moved to the test-helper to be reused (but not before needed - YAGNI :)
-
-    const I18nAccount = i18n(Account);
-
-    // Now set up react context for react routes
-    const context = {
-      router: {
-        makeHref() {},
-
-        isActive() { return false; },
-      },
-    };
-
-    const Wrapper = React.createClass({
-      childContextTypes: {
-        router: React.PropTypes.object,
-      },
-      getChildContext: () => context,
-      render() {
-        return (<I18nAccount {...props}/>);
-      },
-    });
-
-    const component = TestUtils.renderIntoDocument(<Wrapper/>);
+    const component = TestUtils.renderIntoDocument(React.createElement(i18n(Account), props));
     node = React.findDOMNode(component);
   });
 
