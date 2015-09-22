@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { IntlMixin } from 'react-intl';
-
 export default (Component) => {
   class i18n extends React.Component {
     constructor(props, context) {
