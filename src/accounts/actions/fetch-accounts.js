@@ -15,7 +15,7 @@ import api from 'nordnet-next-api';
 import {
   ACCOUNTS_REQUEST,
   ACCOUNTS_REQUEST_SUCCESS,
-  ACCOUNTS_REQUEST_FAILURE
+  ACCOUNTS_REQUEST_FAILURE,
 } from './action-types';
 
 /*
