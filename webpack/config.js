@@ -43,7 +43,7 @@ var config = {
   module: {
     loaders: loaders
   },
-  externals: externals,
+  externals: DEBUG ? [] : externals,
   postcss: [
     autoprefixer
   ],
@@ -66,7 +66,7 @@ var config = {
       '/sc/*': 'http://' + pkg.config.api_server.host + ':' + pkg.config.api_server.port,
       '/next/2/*': 'http://' + pkg.config.api_server.host + ':' + pkg.config.api_server.port
     },
-    stats: { 
+    stats: {
       colors: true
     }
   }

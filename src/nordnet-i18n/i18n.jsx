@@ -8,7 +8,6 @@ export default (Component) => {
 
     getChildContext() {
       return {
-        formats: this.props.formats,
         messages: this.props.messages,
         locales: this.props.locales,
       };
@@ -22,7 +21,6 @@ export default (Component) => {
   }
 
   i18n.childContextTypes = {
-    formats: React.PropTypes.object,
     messages: React.PropTypes.object.isRequired,
     locales: React.PropTypes.array.isRequired,
   };
