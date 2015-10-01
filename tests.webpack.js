@@ -12,5 +12,9 @@ require('intl/locale-data/jsonp/sv-FI.js');
 require('intl/locale-data/jsonp/nb-NO.js');
 require('intl/locale-data/jsonp/nn-NO.js');
 require('intl/locale-data/jsonp/da-DK.js');
-const context = require.context('./src', true, /\.test\.js$/);
+
+// see http://chaijs.com/guide/styles/
+chai.config.truncateThreshold = 0;
+
+const context = require.context('./src', true, /\.js/);
 context.keys().forEach(context);

@@ -1,6 +1,6 @@
 import React from 'react/addons';
 import {i18n} from 'nordnet-i18n';
-import Account from '../account.jsx';
+import Account from '../account';
 
 const TestUtils = React.addons.TestUtils;
 

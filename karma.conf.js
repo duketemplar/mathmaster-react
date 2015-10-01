@@ -1,7 +1,17 @@
-const webpack = require('webpack');
-const path = require('path');
 
 require('karma-common-js');
+const createKarmaConfig = require('./webpack/create-karma-config');
+
+function hasConfig(key) {
+  return !!(process.env.KARMA_ENV && process.env.KARMA_ENV.indexOf(key) !== -1);
+}
+
+const envConfig = {
+  sourcemap: hasConfig('sourcemap'),
+  coverage: hasConfig('coverage'),
+};
+
+const webpackConf =  createKarmaConfig(envConfig);
 
 module.exports = function(config) {
   config.set({
@@ -28,13 +38,16 @@ module.exports = function(config) {
       'tests.webpack.js', //just load this file
     ],
     preprocessors: {
-      'tests.webpack.js': ['webpack', 'sourcemap'], //preprocess with webpack and a sourcemap loader
+      'tests.webpack.js': envConfig.sourcemap ? ['webpack', 'sourcemap'] : ['webpack'],
     },
-    reporters: ['mocha', 'junit', 'coverage'],
+    reporters: envConfig.coverage ? ['mocha', 'junit', 'coverage'] : ['mocha', 'junit'],
 
     coverageReporter: {
       dir: 'reports/coverage',
       reporters: [
+        {
+          type: 'text-summary',
+        },
         {
           type: 'html',
           subdir: 'html',
@@ -52,47 +65,7 @@ module.exports = function(config) {
       outputFile: '../test-results.xml', // Make jenkins happy (but maybe we want to run multiple browsers so we should have several test results file)
       suite: '',
     },
-
-    // see https://github.com/webpack/karma-webpack/issues/23
-    webpack: { //kind of a copy of your webpack config
-      devtool: 'inline-source-map', //just do inline source maps instead of the default
-      module: {
-        preLoaders: [
-          {
-            test: /^(?!.*test\.js$).*[\.js]$/,
-            include: path.resolve('src'),
-            loader: 'babel',
-          },
-          {
-            test: /\.js$/,
-            include: path.resolve('src'),
-            loader: 'isparta',
-          },
-        ],
-        loaders: [
-          {
-            test: /\.js[x]?$/,
-            loader: 'babel-loader',
-            exclude: /node_modules/
-          }, {
-            test: /\.json$/,
-            loader: 'json-loader',
-            exclude: /node_modules/
-          }
-        ],
-      },
-      plugins: [
-        new webpack.NormalModuleReplacementPlugin(/^test-helper$/, __dirname + '/test/test-helper.js'),
-      ],
-      resolve: {
-        alias: {
-          'nordnet-i18n': path.join(__dirname, './src/nordnet-i18n'),
-          'nordnet-utils': path.join(__dirname, './src/nordnet-utils'),
-          'mock-login': path.join(__dirname, './api-server/mock-login.jsx'),
-        },
-        extensions: ['', '.js', '.json', '.jsx'],
-      },
-    },
+    webpack: webpackConf,
     webpackServer: {
       noInfo: true, //please don't spam the console when running in karma!
     },
