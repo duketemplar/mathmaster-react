@@ -36,7 +36,6 @@ const loadersWithoutSourceMap = [
 
 
 function createKarmaConfig(config) {
-  console.log('createKarmaConfig ', config);
   // We can't have both coverage and source map at the same time ...
   const preLoaders = config.coverage ? preLoadersForCodeCoverage : [];
   const loaders = config.coverage ? [] : loadersWithoutSourceMap;
