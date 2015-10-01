@@ -43,7 +43,7 @@ var config = {
   module: {
     loaders: loaders
   },
-  externals: DEBUG ? [] : externals,
+  externals: externals,
   postcss: [
     autoprefixer
   ],
