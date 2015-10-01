@@ -2,7 +2,8 @@ import thunkMiddleware from 'redux-thunk';
 import { createStore, applyMiddleware } from 'redux';
 import fetchAccounts from '../actions/fetch-accounts';
 import accountsReducer from '../reducers/accounts';
-import {createPromiseHelper} from 'test-helper';
+import {createSuccessPromise, createFailPromise} from 'test-helper';
+
 import api from 'nordnet-next-api';
 
 const createStoreWithMiddleware = applyMiddleware(
@@ -10,41 +11,81 @@ const createStoreWithMiddleware = applyMiddleware(
 //  loggerMiddleware // neat middleware that logs actions
 )(createStore);
 
-const store = createStoreWithMiddleware(accountsReducer);
 
 describe('accounts.states', () => {
-  const promiseHelper = createPromiseHelper();
-
   let sandbox;
+  let store;
+  let stateChanges;
+  let unsubscribe;
 
-  beforeEach(() => {
+  function createAccountStore() {
+    store = createStoreWithMiddleware(accountsReducer);
+  }
+
+  function subscribeToStoreChanges() {
+    stateChanges = [];
+    unsubscribe = store.subscribe(() => stateChanges.push(store.getState()));
+  }
+
+  function stubNextApi(value) {
     sandbox = sinon.sandbox.create();
-    sandbox.stub(api, 'get', () => Promise.resolve({data: 'some accounts'}));
-  });
+    sandbox.stub(api, 'get', () => value);
+  }
 
-  afterEach(() => {
+  function unsubsribeAndRestore() {
+    stateChanges = [];
     sandbox.restore();
-  });
+    unsubscribe();
+  }
 
   describe('when successful fetch', () => {
-    let stateChanges;
-    let unsubscribe;
+    afterEach(unsubsribeAndRestore);
 
     beforeEach(() => {
-      stateChanges = [];
-      unsubscribe = store.subscribe(() => stateChanges.push(store.getState()));
-      const promise = store.dispatch(fetchAccounts());
-      promiseHelper.settle(promise);
+      // given
+      createAccountStore();
+      stubNextApi(createSuccessPromise({data: 'some accounts'}));
+      subscribeToStoreChanges();
+
+      // when
+      store.dispatch(fetchAccounts());
     });
 
-    afterEach(() => unsubscribe());
-
-    const EXPECTED_STATE_CHANGES = [
+    const EXPECTED_STATE_CHANGES_WHEN_SUCCESS = [
       { isFetching: true, accounts: []},
       { isFetching: false, accounts: 'some accounts'},
     ];
 
-    EXPECTED_STATE_CHANGES.forEach((expectedState, index) => {
+    it('does two state changes', () => expect(stateChanges.length).to.equal(2));
+
+    EXPECTED_STATE_CHANGES_WHEN_SUCCESS.forEach((expectedState, index) => {
+      it('has correct state change number: ' + (index + 1), () => {
+        expect(stateChanges[index]).to.eql(expectedState);
+      });
+    });
+  });
+
+  describe('when failed fetch', () => {
+    afterEach(unsubsribeAndRestore);
+
+    beforeEach(() => {
+      // given
+      createAccountStore();
+      stubNextApi(createFailPromise({data: 'ojojoj'}));
+      subscribeToStoreChanges();
+
+      // when
+      store.dispatch(fetchAccounts());
+    });
+
+    const EXPECTED_STATE_CHANGES_WHEN_FAILED = [
+      { isFetching: true, accounts: []},
+      { isFetching: false, accounts: []},
+    ];
+
+    it('does two state changes', () => expect(stateChanges.length).to.equal(2));
+
+    EXPECTED_STATE_CHANGES_WHEN_FAILED.forEach((expectedState, index) => {
       it('has correct state change number: ' + (index + 1), () => {
         expect(stateChanges[index]).to.eql(expectedState);
       });

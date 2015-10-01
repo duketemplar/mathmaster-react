@@ -3,6 +3,10 @@ const path = require('path');
 
 require('karma-common-js');
 
+const RUN_FAST = process.env.KARMA_ENV === 'fast';
+
+console.log('RUN_FAST: ' + RUN_FAST);
+
 module.exports = function(config) {
   config.set({
 
@@ -30,11 +34,14 @@ module.exports = function(config) {
     preprocessors: {
       'tests.webpack.js': ['webpack', 'sourcemap'], //preprocess with webpack and a sourcemap loader
     },
-    reporters: ['mocha', 'junit', 'coverage'],
+    reporters: RUN_FAST ? ['mocha'] : ['mocha', 'junit', 'coverage'],
 
     coverageReporter: {
       dir: 'reports/coverage',
       reporters: [
+        {
+          type: 'text-summary',
+        },
         {
           type: 'html',
           subdir: 'html',
@@ -57,32 +64,31 @@ module.exports = function(config) {
     webpack: { //kind of a copy of your webpack config
       devtool: 'inline-source-map', //just do inline source maps instead of the default
       module: {
-        preLoaders: [
+        preLoaders: RUN_FAST ? [] : [
           {
-            test: /^(?!.*test\.js$).*[\.js]$/,
-            include: path.resolve('src'),
-            loader: 'babel',
-          },
-          {
-            test: /\.js$/,
+            test: /\.jsx?$/,
             include: path.resolve('src'),
             loader: 'isparta',
           },
         ],
         loaders: [
           {
-            test: /\.js[x]?$/,
+            test: /\.jsx?$/,
             loader: 'babel-loader',
-            exclude: /node_modules/
+            exclude: /node_modules/,
           }, {
             test: /\.json$/,
             loader: 'json-loader',
-            exclude: /node_modules/
-          }
+            exclude: /node_modules/,
+          },
         ],
       },
       plugins: [
-        new webpack.NormalModuleReplacementPlugin(/^test-helper$/, __dirname + '/test/test-helper.js'),
+        new webpack.NormalModuleReplacementPlugin(/^test-helper$/, __dirname + '/test-helper/'),
+        new webpack.NormalModuleReplacementPlugin(/\.scss$/, __dirname + '/test-helper/noop.js'),
+        new webpack.NormalModuleReplacementPlugin(/\.css$/, __dirname + '/test-helper/noop.js'),
+        new webpack.NormalModuleReplacementPlugin(/\.svg$/, __dirname + '/test-helper/noop.js'),
+        new webpack.NormalModuleReplacementPlugin(/assets\//, __dirname + '/test-helper/noop.js'),
       ],
       resolve: {
         alias: {
