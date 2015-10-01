@@ -11,7 +11,6 @@ const createStoreWithMiddleware = applyMiddleware(
 //  loggerMiddleware // neat middleware that logs actions
 )(createStore);
 
-
 describe('accounts.states', () => {
   let sandbox;
   let store;

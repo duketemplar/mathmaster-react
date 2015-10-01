@@ -1,11 +1,17 @@
-const webpack = require('webpack');
-const path = require('path');
 
 require('karma-common-js');
+const createKarmaConfig = require('./webpack/create-karma-config');
 
-const RUN_FAST = process.env.KARMA_ENV === 'fast';
+function hasConfig(key) {
+  return !!(process.env.KARMA_ENV && process.env.KARMA_ENV.indexOf(key) !== -1);
+}
 
-console.log('RUN_FAST: ' + RUN_FAST);
+const envConfig = {
+  sourcemap: hasConfig('sourcemap'),
+  coverage: hasConfig('coverage'),
+};
+
+const webpackConf =  createKarmaConfig(envConfig);
 
 module.exports = function(config) {
   config.set({
@@ -32,9 +38,9 @@ module.exports = function(config) {
       'tests.webpack.js', //just load this file
     ],
     preprocessors: {
-      'tests.webpack.js': RUN_FAST ? ['webpack'] : ['webpack', 'sourcemap'], //preprocess with webpack and a sourcemap loader
+      'tests.webpack.js': envConfig.sourcemap ? ['webpack', 'sourcemap'] : ['webpack'],
     },
-    reporters: RUN_FAST ? ['mocha'] : ['mocha', 'junit', 'coverage'],
+    reporters: envConfig.coverage ? ['mocha', 'junit', 'coverage'] : ['mocha', 'junit'],
 
     coverageReporter: {
       dir: 'reports/coverage',
@@ -59,46 +65,7 @@ module.exports = function(config) {
       outputFile: '../test-results.xml', // Make jenkins happy (but maybe we want to run multiple browsers so we should have several test results file)
       suite: '',
     },
-
-    // see https://github.com/webpack/karma-webpack/issues/23
-    webpack: { //kind of a copy of your webpack config
-      devtool: RUN_FAST ? '' : 'inline-source-map', //just do inline source maps instead of the default
-      module: {
-        preLoaders: RUN_FAST ? [] : [
-          {
-            test: /\.jsx?$/,
-            include: path.resolve('src'),
-            loader: 'isparta',
-          },
-        ],
-        loaders: [
-          {
-            test: /\.jsx?$/,
-            loader: 'babel-loader',
-            exclude: /node_modules/,
-          }, {
-            test: /\.json$/,
-            loader: 'json-loader',
-            exclude: /node_modules/,
-          },
-        ],
-      },
-      plugins: [
-        new webpack.NormalModuleReplacementPlugin(/^test-helper$/, __dirname + '/test-helper/'),
-        new webpack.NormalModuleReplacementPlugin(/\.scss$/, __dirname + '/test-helper/noop.js'),
-        new webpack.NormalModuleReplacementPlugin(/\.css$/, __dirname + '/test-helper/noop.js'),
-        new webpack.NormalModuleReplacementPlugin(/\.svg$/, __dirname + '/test-helper/noop.js'),
-        new webpack.NormalModuleReplacementPlugin(/assets\//, __dirname + '/test-helper/noop.js'),
-      ],
-      resolve: {
-        alias: {
-          'nordnet-i18n': path.join(__dirname, './src/nordnet-i18n'),
-          'nordnet-utils': path.join(__dirname, './src/nordnet-utils'),
-          'mock-login': path.join(__dirname, './api-server/mock-login.jsx'),
-        },
-        extensions: ['', '.js', '.json', '.jsx'],
-      },
-    },
+    webpack: webpackConf,
     webpackServer: {
       noInfo: true, //please don't spam the console when running in karma!
     },
