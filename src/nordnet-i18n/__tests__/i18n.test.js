@@ -35,10 +35,6 @@ describe('i18n', () => {
     component = TestUtils.findRenderedComponentWithType(tree, Component);
   });
 
-  describe('when parent is given property: "format"', () => {
-    it('expose the format context', () => expect(component.context.formats).to.equal(formats));
-  });
-
   describe('when parent is given property: "messages"', () => {
     it('expose the messages context', () => expect(component.context.messages).to.equal(messages));
   });

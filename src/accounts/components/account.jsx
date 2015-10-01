@@ -22,4 +22,18 @@ class Account extends React.Component {
   }
 }
 
+/*
+ * Prop type validation
+ * You can here see what the component needs.
+ * If the component does not get what it needs a warning will be displayed on the console
+ * See https://facebook.github.io/react/docs/reusable-components.html
+ */
+Account.propTypes = {
+  getIntlMessage: React.PropTypes.func.isRequired,
+  account: React.PropTypes.shape({
+    alias: React.PropTypes.string.isRequired,
+    accno: React.PropTypes.number.isRequired,
+  }).isRequired,
+};
+
 export default translatable(Account);

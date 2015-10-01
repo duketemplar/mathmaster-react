@@ -50,5 +50,18 @@ class AccountsListContainer extends React.Component {
   }
 }
 
+/*
+ * Prop type validation
+ * You can here see what the component needs.
+ * If the component does not get what it needs a warning will be displayed in the console
+ * See https://facebook.github.io/react/docs/reusable-components.html
+ */
+AccountsListContainer.propTypes = {
+  fetchAccounts: React.PropTypes.func.isRequired,
+  getIntlMessage: React.PropTypes.func.isRequired,
+  isFetching: React.PropTypes.bool.isRequired,
+  accounts: React.PropTypes.array.isRequired,
+};
+
 // exporting React container element by default
 export default translatable(AccountsListContainer);

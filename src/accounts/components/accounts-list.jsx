@@ -41,5 +41,15 @@ class AccountsList extends React.Component {
   }
 }
 
+/*
+ * Prop type validation
+ * You can here see what the component needs.
+ * If the component does not get what it needs a warning will be displayed in the console
+ * See https://facebook.github.io/react/docs/reusable-components.html
+ */
+AccountsList.propTypes = {
+  accounts: React.PropTypes.array.isRequired,
+};
+
 // exports default React component
 export default AccountsList;

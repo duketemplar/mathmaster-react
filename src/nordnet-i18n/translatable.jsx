@@ -14,7 +14,6 @@ export default (Component) => {
   }
 
   Translatable.contextTypes = {
-    formats: React.PropTypes.object.isRequired,
     messages: React.PropTypes.object.isRequired,
     locales: React.PropTypes.array.isRequired,
   };
