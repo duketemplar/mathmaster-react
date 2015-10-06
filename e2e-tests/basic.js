@@ -1,9 +1,15 @@
-firstAccountName='#nordnet-react-app > div:nth-child(1) > ul:nth-child(1) > li:nth-child(1) > div:nth-child(1)'
+var DEBUG = process.env.NODE_ENV === 'development';
+var deployUrl = DEBUG? '' : '/sc/' + process.env.npm_package_name + '/' + process.env.VERSION;
+
+var firstAccountName='#nordnet-react-app > div:nth-child(1) > ul:nth-child(1) > li:nth-child(1) > div:nth-child(1)'
 
 module.exports = {
-  'Nordnet react app light' : function (browser) {
+  'Internal index page' : function (browser) {
+    var url = browser.launch_url + deployUrl + '/';
+    console.log('Using url: ' + url)
+
     browser
-      .url(browser.launch_url + '/')
+      .url(url)
       .waitForElementVisible('body', 1000)
       .assert.containsText('#login-container', 'Username')
       .setValue('input[type=text]', 'stora')
