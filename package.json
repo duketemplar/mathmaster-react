@@ -5,11 +5,11 @@
   "config": {
     "dist": "./dist",
     "dev_server": {
-      "host": "0.0.0.0",
+      "host": "localhost",
       "port": 9000
     },
     "api_server": {
-      "host": "0.0.0.0",
+      "host": "localhost",
       "port": 9002
     }
   },
