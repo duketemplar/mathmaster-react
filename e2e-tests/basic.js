@@ -4,7 +4,7 @@ var deployUrl = DEBUG? '/' : '/mux/web/nordnet/seed.html';
 var firstAccountName='#nordnet-react-app-light > div:nth-child(1) > ul:nth-child(1) > li:nth-child(1) > div:nth-child(1)'
 
 module.exports = {
-  'Internal index page' : function (browser) {
+  'Shows account name when logged in' : function (browser) {
     var url = browser.launch_url + deployUrl;
     console.log('Using url: ' + url)
 
