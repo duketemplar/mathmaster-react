@@ -33,7 +33,7 @@
     "test": "KARMA_ENV=coverage karma start",
     "test:debug": "KARMA_ENV=sourcemap karma start --no-single-run --reporters mocha --browsers Chrome",
     "test:tdd": "karma start --auto-watch --no-single-run --reporters mocha karma.conf",
-    "e2e-test": "nightwatch -t e2e-tests/basic.js -r junit",
+    "e2e-test": "nightwatch -r junit",
     "prepush": "npm run validate"
   },
   "dependencies": {
