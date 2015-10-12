@@ -4,7 +4,7 @@
 
 	"test_settings" : {
 		"default" : {
-			"launch_url" : "http://dev-nikbol2.dev.nordnet.se:9000",
+			"launch_url" : "https://nordnet.webfront1.ci.nordnet.se",
 			"selenium_port"  : 4444,
 			"selenium_host"  : "selenium.test.nordnet.se",
 			"silent": true,
