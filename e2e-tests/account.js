@@ -20,5 +20,18 @@ module.exports = {
       .click('button')
       .waitForElementNotPresent(firstAccountName, 1000)
       .end();
-  }
+  },
+
+  afterEach : function(browser, done) {
+    browser.getLog('browser', function(result) {
+      console.log('*** Browser console output ***');
+      result.forEach(function(log) {
+        console.log('[' + log.level + '] ' + log.timestamp + ' : ' + log.message);
+      });
+      console.log('*** End of browser console output ***');
+    }).end(function() {
+      // Must call so we don't leave the session hanging
+      done();
+    });
+  },
 };
