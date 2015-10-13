@@ -6,9 +6,12 @@ function hasConfig(key) {
   return !!(process.env.KARMA_ENV && process.env.KARMA_ENV.indexOf(key) !== -1);
 }
 
+const sourcemap = hasConfig('sourcemap');
+
+// We can't have both coverage and source map at the same time...
 const envConfig = {
-  sourcemap: hasConfig('sourcemap'),
-  coverage: hasConfig('coverage'),
+  sourcemap: sourcemap,
+  coverage: !sourcemap,
 };
 
 const webpackConf =  createKarmaConfig(envConfig);
