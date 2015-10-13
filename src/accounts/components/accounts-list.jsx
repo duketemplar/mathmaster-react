@@ -34,7 +34,7 @@ class AccountsList extends React.Component {
     // maps accounts from properties to Account React components that should be rendered
     const accounts = this.props.accounts.map(this.renderAccount);
     return (
-      <ul>
+      <ul className='accounts-list'>
         { accounts }
       </ul>
     );

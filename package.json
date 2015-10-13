@@ -34,6 +34,7 @@
     "test:debug": "KARMA_ENV=sourcemap karma start --no-single-run --reporters mocha --browsers Chrome",
     "test:windebug": "set KARMA_ENV=sourcemap&&karma start --no-single-run --reporters mocha --browsers Chrome",
     "test:tdd": "karma start --auto-watch --no-single-run --reporters mocha karma.conf",
+    "e2e-test": "nightwatch -r junit",
     "prepush": "npm run validate"
   },
   "dependencies": {
@@ -94,6 +95,7 @@
     "lodash": "^3.8.0",
     "mkdirp": "^0.5.1",
     "mocha": "^2.2.4",
+    "nightwatch": "0.8.3",
     "node-uuid": "^1.4.3",
     "nodemon": "^1.4.1",
     "nordnet-release-plugin": "0.0.4",
