@@ -9,7 +9,7 @@ class Account extends React.Component {
 
     return (
       <li>
-        <div>{ alias }</div>
+        <div className='alias'>{ alias }</div>
         <div>{ this.props.getIntlMessage('ACCOUNTS.ACCOUNT_NUMBER') }: { accno }</div>
         <div>
           <FormattedNumber

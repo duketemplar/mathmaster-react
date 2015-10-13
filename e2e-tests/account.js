@@ -1,7 +1,7 @@
 var DEBUG = process.env.NODE_ENV === 'development';
 var deployUrl = DEBUG? '/' : '/mux/web/nordnet/seed.html';
 
-var firstAccountName='#nordnet-react-app-light > div:nth-child(1) > ul:nth-child(1) > li:nth-child(1) > div:nth-child(1)'
+var firstAccountName='ul.accounts-list li:first-child .alias';
 
 module.exports = {
   'Shows account name when logged in' : function (browser) {
