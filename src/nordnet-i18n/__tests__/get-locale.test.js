@@ -27,7 +27,7 @@ describe('getLocale', () => {
 
     beforeEach(() => {
       sandbox = sinon.sandbox.create();
-      const response = {data: {language: 'en', country: 'gb'}};
+      const response = {data: {lang: 'en', country: 'gb'}};
       sandbox.stub(api, 'get', () => mockPromise(response));
     });
 
@@ -48,4 +48,3 @@ describe('getLocale', () => {
     it('uses /next/2/login', () => expect(api.get).to.have.been.calledWith('/next/2/login'));
   });
 });
-
