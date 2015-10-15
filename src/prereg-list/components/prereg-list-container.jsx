@@ -35,7 +35,7 @@ class PreregListContainer extends React.Component {
 
     // returns dummy component and provides loaded accounts array to it via props
     return (
-      <PreregList accounts={ this.props.accounts } />
+      <PreregList preregAccounts={ this.props.preregAccounts } />
     );
   }
 }

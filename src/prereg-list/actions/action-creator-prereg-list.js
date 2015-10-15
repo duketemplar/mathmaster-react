@@ -21,7 +21,7 @@ import {
 /*
  * Action creator that returns action (payload) for ACCOUNTS_REQUEST action type.
  */
-function requestAccounts() {
+function requestPreregAccounts() {
   return {
     type: PREREG_LIST_REQUEST,
   };
@@ -30,9 +30,9 @@ function requestAccounts() {
 /*
  * Action creator that returns action (payload) for ACCOUNTS_REQUEST_SUCCESS action type.
  */
-function requestAccountsSuccess(data) {
+function requestPreregAccountsSuccess(data) {
   return {
-    type: PREREG_LIST_REQUEST,
+    type: PREREG_LIST_REQUEST_SUCCESS,
     data,
   };
 }
@@ -40,12 +40,14 @@ function requestAccountsSuccess(data) {
 /*
  * Action creator that returns action (payload) for ACCOUNTS_REQUEST_FAILURE action type.
  */
-function requestAccountsFailure(data) {
+function requestPreregAccountsFailure(data) {
   return {
-    type: PREREG_LIST_REQUEST,
+    type: PREREG_LIST_REQUEST_FAILURE,
     data,
   };
 }
+
+
 
 /*
  * Exports async action creator. Async action creators are returning a function instead of a plain object (compare e.g. to requestAccounts).
@@ -60,9 +62,9 @@ function requestAccountsFailure(data) {
  */
 export default function fetchAccounts() {
   return (dispatch) => {
-    dispatch(requestAccounts());
-    return api.get('/next/2/accounts').then(
-        ({ data }) => dispatch(requestAccountsSuccess(data)),
-        ({ data }) => dispatch(requestAccountsFailure(data)));
+    dispatch(requestPreregAccounts());
+    return api.get('/next/2/prereg/accounts').then(
+        ({ data }) => dispatch(requestPreregAccountsSuccess(data)),
+        ({ data }) => dispatch(requestPreregAccountsFailure(data)));
   };
 }

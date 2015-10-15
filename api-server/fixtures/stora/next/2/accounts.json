@@ -1,11 +1,11 @@
 [
   {
-    "accno": 5997085,
+    "accno": "Foo bar ",
     "bank_accno": "5997085 0001",
     "type": "Stock- and mutual funds account",
-    "account_code": "DEP",
+    "account_code": "DEPA",
     "default": true,
-    "alias": "Stora Webffdtyuå"
+    "alias": "stora alias"
   },
   {
     "accno": 8191678,

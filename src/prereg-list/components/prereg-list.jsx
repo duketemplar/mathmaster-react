@@ -5,21 +5,22 @@ class PreregList extends React.Component {
   /*
    * Returns React component for given account.
    */
-  renderAccount(account) {
+  renderAccount(preregAccount) {
     // always set "key" property on those components that are part of an array
     // each key should be unique and constant for given component that they identify
     // see more on key in React documentation - https://facebook.github.io/react/docs/multiple-components.html#dynamic-children
     return (
-      <div >some list</div>
+      <div >{preregAccount}</div>
     );
   }
 
   render() {
     // maps accounts from properties to Account React components that should be rendered
-    const accounts = this.props.accounts.map(this.renderAccount);
+    console.log(this.props);
+    const preregAccounts = this.props.preregAccounts.map(this.renderAccount);
     return (
-      <ul className='accounts-list'>
-        { accounts }
+      <ul className='prereg-list'>
+        { preregAccounts }
       </ul>
     );
   }

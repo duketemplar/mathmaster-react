@@ -20,6 +20,7 @@ app
   .use(mount('/now/', serve(__dirname + '/now')))
   .use(mount('/next', ntagMiddleware))
   .use(mount('/next/2/accounts', authenticatedMiddleware))
+  .use(mount('/next/2/prereg', authenticatedMiddleware))
   .use(jsonFixtures(__dirname + '/fixtures'))
   .use(router.routes())
   .use(router.allowedMethods());

@@ -18,7 +18,7 @@ const MIDDLEWARE = [thunkMiddleware];
 // REPLACE with list of your own reducers
 const REDUCERS = {
   accounts: accountsReducer,
-  preregList: preregListReducer,
+  preregAccounts: preregListReducer,
 };
 
 // creates Redux store

@@ -8,6 +8,7 @@ module.exports = serve;
 // Declare authenticated paths here
 const loginRequiredPaths = [
   'accounts',
+  'prereg'
 ];
 
 function serve(root, opts) {

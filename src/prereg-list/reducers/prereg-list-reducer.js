@@ -19,7 +19,7 @@ import { PREREG_LIST_REQUEST, PREREG_LIST_REQUEST_SUCCESS, PREREG_LIST_REQUEST_F
  * For each supported action type reducer returns a new state.
  * For action types that are unknow to the reducer current state is returned.
  */
-export default function preregList(state = {isFetching: false, bankAccounts: []}, action) {
+export default function preregList(state = {isFetching: false, preregAccounts: []}, action) {
   switch (action.type) {
 
   // indicates that accounts loading request is in progress
@@ -34,7 +34,7 @@ export default function preregList(state = {isFetching: false, bankAccounts: []}
   case PREREG_LIST_REQUEST_SUCCESS:
     return _.assign({}, state, {
       isFetching: false,
-      accounts: action.data,
+      preregAccounts: action.data,
     });
 
   // indicates that accounts request failed
@@ -42,7 +42,7 @@ export default function preregList(state = {isFetching: false, bankAccounts: []}
   case PREREG_LIST_REQUEST_FAILURE:
     return _.assign({}, state, {
       isFetching: false,
-      accounts: [],
+      preregAccounts: [],
     });
 
   // returns current state for all other action types

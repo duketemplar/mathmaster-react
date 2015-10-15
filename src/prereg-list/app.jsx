@@ -29,7 +29,7 @@ class App extends React.Component {
  * See https://github.com/rackt/react-redux#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options
  */
 function mapStateToProps(state) {
-  return state.accounts;
+  return state.preregAccounts;
 }
 
 /*
