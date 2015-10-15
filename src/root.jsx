@@ -17,6 +17,7 @@ import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
 
 // React container component that is responsible for loading initial data on DOM mount
 import AccountsListContainer from './accounts/app';
+import PreregListContainer from './prereg-list/app';
 
 // i18n function for adding localization support in react components
 import { i18n } from 'nordnet-i18n';
@@ -28,7 +29,10 @@ import store from './store';
 class App extends React.Component {
   render() {
     return (
+      <div>
       <AccountsListContainer {...this.props} />
+      <PreregListContainer {...this.props} />
+      </div>
     );
   }
 }
